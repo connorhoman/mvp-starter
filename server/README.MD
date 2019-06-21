@@ -1,0 +1,1 @@
+mongoimport --jsonArray --db fantasy --collection players --file playerData.json

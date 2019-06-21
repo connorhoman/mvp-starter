@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/fantasy');
 
 var db = mongoose.connection;
 
@@ -11,15 +11,24 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+var playerSchema = mongoose.Schema({
+  id: Number,
+  rank: Number,
+  pick: Number,
+  name: String,
+  position: String,
+  team: String,
+  bye: Number,
+  ADP: Number,
+  STD: Number,
+  HIGH: Number,
+  LOW: Number,
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Player = mongoose.model('Player', playerSchema);
 
 var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+  Player.find({}, function(err, items) {
     if(err) {
       callback(err, null);
     } else {
