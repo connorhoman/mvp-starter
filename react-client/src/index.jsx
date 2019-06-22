@@ -7,6 +7,9 @@ import PlayerList from './components/PlayerList.jsx';
 
 const Background = styled.div`
   text-align: center;
+  display: flex;
+`;
+const List = styled.span`
 `;
 
 class App extends React.Component {
@@ -21,8 +24,11 @@ class App extends React.Component {
     $.ajax({
       url: '/players', 
       success: (data) => {
+        var sorted = data.sort(function(a,b) {
+          return a.rank - b.rank;
+        })
         this.setState({
-          players: data
+          players: sorted
         })
       },
       error: (err) => {
@@ -34,7 +40,6 @@ class App extends React.Component {
   onDragEnd(result) {
     const destination = result.destination;
     const source = result.source;
-    const draggableId = result.draggableId;
 
     if (!destination) {
       return;
@@ -45,7 +50,6 @@ class App extends React.Component {
 
     const players = this.state.players;
     const newRanks = Array.from(players);
-    console.log(newRanks);
 
     newRanks.splice(source.index, 1);
     newRanks.splice(destination.index, 0, players[source.index]);
@@ -57,8 +61,24 @@ class App extends React.Component {
     return (
       <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>
         <Background>
-          <h1>Player List</h1>
-          <PlayerList key={1} id={1} players={this.state.players}/>
+          <List>
+            <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'QB')}/>
+          </List>
+          <List>
+            <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'RB')}/>
+          </List>
+          <List>
+            <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'WR')}/>
+          </List>
+          <List>
+            <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'TE')}/>
+          </List>
+          <List>
+            <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'DEF')}/>
+          </List>
+          <List>
+            <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'PK')}/>
+          </List>
         </Background>
       </DragDropContext>
       

@@ -4,21 +4,36 @@ import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
 
 const List = styled.div`
-  align-self: center;
-  text-align: center;
+  width: 355px;
 `;
 
-const PlayerList = (props) => (
-  <List>
-    <Droppable droppableId={props.id}>
-      {(provided) => (
-        <div ref={provided.innerRef} {...provided.droppableProps}>
-          {props.players.map((player, index) => <Player key={player.id} player={player} index={index}/>)}
-          {provided.placeholder}
-        </div>
-      )}
-    </Droppable>
-  </List>
-)
+class PlayerList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      players: this.props.players
+    })
+  }
+  
+  render() {
+    return (
+      <List>
+        <Droppable droppableId={this.props.id}>
+          {(provided) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              {this.props.players.map((player, index) => <Player key={player.id} player={player} index={index}/>)}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </List>
+    )
+  }
+}
 
 export default PlayerList;
