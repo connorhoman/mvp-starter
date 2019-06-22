@@ -68,6 +68,7 @@ class App extends React.Component {
   onDragEnd(result) {
     const destination = result.destination;
     const source = result.source;
+    const droppableId = result.destination.droppableId;
 
     if (!destination) {
       return;
@@ -75,60 +76,60 @@ class App extends React.Component {
     if (source.droppableId === destination.droppableId && source.index === destination.index) {
       return;
     }
-
-    const players = this.state.players;
+    const players = this.state[droppableId];
     const newRanks = Array.from(players);
 
     newRanks.splice(source.index, 1);
     newRanks.splice(destination.index, 0, players[source.index]);
+    console.log(droppableId);
 
-    this.setState({players: newRanks});
+    this.setState({[droppableId]: newRanks});
   }
 
   render () {
     return (
       <div>
         <Title>Fantasy Football Draft Dashboard</Title>
-        <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>
-          <Background>
+        <Background>
+          <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>
             <List>
               <Header>
                 Quarterbacks
               </Header>
-              <PlayerList key={1} id={1} players={this.state.qb}/>
+              <PlayerList key={1} id={'qb'} players={this.state.qb}/>
             </List>
             <List>
               <Header>
                 Running Backs
               </Header>
-              <PlayerList key={1} id={1} players={this.state.rb}/>
+              <PlayerList key={2} id={'rb'} players={this.state.rb}/>
             </List>
             <List>
               <Header>
                 Wide Recievers
               </Header>
-              <PlayerList key={1} id={1} players={this.state.wr}/>
+              <PlayerList key={3} id={'wr'} players={this.state.wr}/>
             </List>
             <List>
               <Header>
                 Tight Ends
               </Header>
-              <PlayerList key={1} id={1} players={this.state.te}/>
+              <PlayerList key={4} id={'te'} players={this.state.te}/>
             </List>
             <List>
               <Header>
                 Defenses
               </Header>
-              <PlayerList key={1} id={1} players={this.state.def}/>
+              <PlayerList key={5} id={'def'} players={this.state.def}/>
             </List>
             <List>
               <Header>
                 Kickers
               </Header>
-              <PlayerList key={1} id={1} players={this.state.pk}/>
-            </List>
-          </Background>
-        </DragDropContext>    
+              <PlayerList key={6} id={'pk'} players={this.state.pk}/>
+            </List>         
+          </DragDropContext>   
+        </Background> 
       </div>    
     )
   }
