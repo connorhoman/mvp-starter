@@ -11,6 +11,16 @@ const Background = styled.div`
 `;
 const List = styled.span`
 `;
+const Header = styled.div`
+  background-color: black;
+  font-size: 20px;
+  color: white;
+`;
+const Title = styled.div`
+  background-color: black;
+  color: white;
+  text-align: center;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -59,29 +69,49 @@ class App extends React.Component {
 
   render () {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>
-        <Background>
-          <List>
-            <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'QB')}/>
-          </List>
-          <List>
-            <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'RB')}/>
-          </List>
-          <List>
-            <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'WR')}/>
-          </List>
-          <List>
-            <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'TE')}/>
-          </List>
-          <List>
-            <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'DEF')}/>
-          </List>
-          <List>
-            <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'PK')}/>
-          </List>
-        </Background>
-      </DragDropContext>
-      
+      <div>
+        <Title>Fantasy Football Draft Dashboard</Title>
+        <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>
+          <Background>
+            <List>
+              <Header>
+                Quarterbacks
+              </Header>
+              <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'QB')}/>
+            </List>
+            <List>
+              <Header>
+                Running Backs
+              </Header>
+              <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'RB')}/>
+            </List>
+            <List>
+              <Header>
+                Wide Recievers
+              </Header>
+              <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'WR')}/>
+            </List>
+            <List>
+              <Header>
+                Tight Ends
+              </Header>
+              <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'TE')}/>
+            </List>
+            <List>
+              <Header>
+                Defenses
+              </Header>
+              <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'DEF')}/>
+            </List>
+            <List>
+              <Header>
+                Kickers
+              </Header>
+              <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'PK')}/>
+            </List>
+          </Background>
+        </DragDropContext>    
+      </div>    
     )
   }
 }

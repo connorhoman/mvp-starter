@@ -10,7 +10,6 @@ const Card = styled.div`
 const Name = styled.span`
   font-weight: bold;
   align-content: left;
-  float: left;
   margin-left: 5px;
 `;
 const Team = styled.span`
@@ -20,12 +19,14 @@ const ADP = styled.span`
   font-size: 12px;
   color: grey;
   margin-left: 5px;
+  float: left;
 `;
 const Wrapper = styled.div`
   padding: 10px;
 `;
 const Rank = styled.span`
   float: left;
+  font-weight: 900;
 `;
 
 class Player extends React.Component {
@@ -64,14 +65,14 @@ class Player extends React.Component {
             <Card ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
               <Wrapper style={{backgroundColor: this.state.background}}>
                 <Rank>
-                  #{ this.props.player.id }
+                  { this.props.player.pick }
                 </Rank>
+                <ADP>
+                  { this.props.player.ADP } ({ this.props.player.STD })
+                </ADP>
                 <Name>
                   { this.props.player.name }
                 </Name>
-                <ADP>
-                  ADP: { this.props.player.ADP } ({ this.props.player.STD })
-                </ADP>
                 <Team>
                   { this.props.player.team }
                 </Team>

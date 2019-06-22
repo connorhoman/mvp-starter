@@ -6,6 +6,9 @@ import { Droppable } from 'react-beautiful-dnd';
 const List = styled.div`
   width: 355px;
 `;
+const Card = styled.div`
+  height: 100px;
+`;
 
 class PlayerList extends React.Component {
   constructor(props) {
@@ -25,10 +28,10 @@ class PlayerList extends React.Component {
       <List>
         <Droppable droppableId={this.props.id}>
           {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
+            <Card ref={provided.innerRef} {...provided.droppableProps}>
               {this.props.players.map((player, index) => <Player key={player.id} player={player} index={index}/>)}
               {provided.placeholder}
-            </div>
+            </Card>
           )}
         </Droppable>
       </List>
