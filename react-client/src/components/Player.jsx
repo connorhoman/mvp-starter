@@ -24,7 +24,7 @@ const ADP = styled.span`
 const Wrapper = styled.div`
   padding: 10px;
 `;
-const Rank = styled.span`
+const Pick = styled.span`
   float: left;
   font-weight: 900;
 `;
@@ -58,15 +58,14 @@ class Player extends React.Component {
   }
 
   render() {
-    return (
-      
+    return (  
       <Draggable draggableId={this.props.player.id} index={this.props.index}>
         {(provided) => (
             <Card ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
               <Wrapper style={{backgroundColor: this.state.background}}>
-                <Rank>
+                <Pick>
                   { this.props.player.pick }
-                </Rank>
+                </Pick>
                 <ADP>
                   { this.props.player.ADP } ({ this.props.player.STD })
                 </ADP>
@@ -79,8 +78,7 @@ class Player extends React.Component {
               </Wrapper>                
             </Card>
         )}
-      </Draggable>
-    
+      </Draggable>   
     )
   }
 }

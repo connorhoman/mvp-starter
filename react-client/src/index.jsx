@@ -26,7 +26,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      players: []
+      qb: [],
+      rb: [],
+      wr: [],
+      te: [],
+      def: [],
+      pk: []
     }
   }
   
@@ -36,9 +41,22 @@ class App extends React.Component {
       success: (data) => {
         var sorted = data.sort(function(a,b) {
           return a.rank - b.rank;
-        })
+        });
+
+        var qbs = sorted.filter(player => player.position === 'QB');
+        var rbs = sorted.filter(player => player.position === 'RB');
+        var wrs = sorted.filter(player => player.position === 'WR');
+        var tes = sorted.filter(player => player.position === 'TE');
+        var defs = sorted.filter(player => player.position === 'DEF');
+        var pks = sorted.filter(player => player.position === 'PK');
+
         this.setState({
-          players: sorted
+          qb: qbs,
+          rb: rbs,
+          wr: wrs,
+          te: tes,
+          def: defs,
+          pk: pks
         })
       },
       error: (err) => {
@@ -77,37 +95,37 @@ class App extends React.Component {
               <Header>
                 Quarterbacks
               </Header>
-              <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'QB')}/>
+              <PlayerList key={1} id={1} players={this.state.qb}/>
             </List>
             <List>
               <Header>
                 Running Backs
               </Header>
-              <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'RB')}/>
+              <PlayerList key={1} id={1} players={this.state.rb}/>
             </List>
             <List>
               <Header>
                 Wide Recievers
               </Header>
-              <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'WR')}/>
+              <PlayerList key={1} id={1} players={this.state.wr}/>
             </List>
             <List>
               <Header>
                 Tight Ends
               </Header>
-              <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'TE')}/>
+              <PlayerList key={1} id={1} players={this.state.te}/>
             </List>
             <List>
               <Header>
                 Defenses
               </Header>
-              <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'DEF')}/>
+              <PlayerList key={1} id={1} players={this.state.def}/>
             </List>
             <List>
               <Header>
                 Kickers
               </Header>
-              <PlayerList key={1} id={1} players={this.state.players.filter(player => player.position === 'PK')}/>
+              <PlayerList key={1} id={1} players={this.state.pk}/>
             </List>
           </Background>
         </DragDropContext>    
