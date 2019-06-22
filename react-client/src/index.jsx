@@ -6,7 +6,6 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import PlayerList from './components/PlayerList.jsx';
 
 const Background = styled.div`
-  background-color: seagreen;
   text-align: center;
 `;
 
