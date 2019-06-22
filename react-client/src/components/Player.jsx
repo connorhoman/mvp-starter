@@ -38,6 +38,7 @@ const AAV = styled.span`
   font-family: 'Times New Roman', Times, serif;
   font-weight: 500;
   font-size: 15px;
+  color: #525151;
 `;
 
 class Player extends React.Component {
