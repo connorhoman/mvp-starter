@@ -1,10 +1,15 @@
 import React from 'react';
 import Player from './Player.jsx';
+import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
 
+const List = styled.div`
+  align-self: center;
+  text-align: center;
+`;
+
 const PlayerList = (props) => (
-  <div>
-    <h4> Player List </h4>
+  <List>
     <Droppable droppableId={props.id}>
       {(provided) => (
         <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -13,7 +18,7 @@ const PlayerList = (props) => (
         </div>
       )}
     </Droppable>
-  </div>
+  </List>
 )
 
 export default PlayerList;
