@@ -7,7 +7,6 @@ const List = styled.div`
   width: 355px;
 `;
 const Card = styled.div`
-  height: 100px;
 `;
 
 class PlayerList extends React.Component {
