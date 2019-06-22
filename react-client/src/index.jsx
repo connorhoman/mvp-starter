@@ -6,10 +6,14 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import PlayerList from './components/PlayerList.jsx';
 
 const Background = styled.div`
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
   text-align: center;
   display: flex;
+  margin-top: 8px;
 `;
 const List = styled.span`
+  border-right: 2px ridge black;
 `;
 const Header = styled.div`
   background-color: black;
@@ -18,14 +22,44 @@ const Header = styled.div`
 `;
 const Title = styled.div`
   background-color: black;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+  font-weight: bold;
   color: white;
+  align-content: center;
+  display: inline;
+`;
+const User = styled.div`
+  align-content: center;
+  display: inline;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  color: white;
+`;
+const Input = styled.input`
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+`;
+const Wrapper = styled.div`
   text-align: center;
+`;
+const Button = styled.button`
+  font-family: 'Courier New', Courier, monospace;
+  margin-left: 5px;
+  font-size: 20px;
+`;
+const Save = styled.button`
+  font-family: 'Courier New', Courier, monospace;
+  margin-right: 20px;
+  font-size: 20px;
 `;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
+      user: '',
+      userRanking: '',
       qb: [],
       rb: [],
       wr: [],
@@ -42,15 +76,15 @@ class App extends React.Component {
         var sorted = data.sort(function(a,b) {
           return a.rank - b.rank;
         });
-
         var qbs = sorted.filter(player => player.position === 'QB');
         var rbs = sorted.filter(player => player.position === 'RB');
         var wrs = sorted.filter(player => player.position === 'WR');
         var tes = sorted.filter(player => player.position === 'TE');
         var defs = sorted.filter(player => player.position === 'DEF');
         var pks = sorted.filter(player => player.position === 'PK');
-
         this.setState({
+          user: '',
+          userRanking: 'ESPN',
           qb: qbs,
           rb: rbs,
           wr: wrs,
@@ -58,6 +92,35 @@ class App extends React.Component {
           def: defs,
           pk: pks
         })
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
+  findRankings() {
+    $.ajax({
+      url: `/rankings/${this.state.user}`,
+      success: (data) => {
+        console.log('data', data);
+        this.setState(...data);
+        console.log(data);
+        this.setState({userRanking: data[0].user});
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    })
+  }
+
+  saveRankings() {
+    $.ajax({
+      url: '/rankings',
+      type: 'POST',
+      data: this.state,
+      success: () => {
+        console.log('Successfully Posted Rankings to Database');
       },
       error: (err) => {
         console.log('err', err);
@@ -88,7 +151,15 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Title>Fantasy Football Draft Dashboard</Title>
+        <Wrapper>
+          <Title>Fantasy Football Draft Dashboard</Title>
+        </Wrapper>
+        <Wrapper>
+          <User>showing {this.state.userRanking}'s ranks</User>
+        </Wrapper>
+        <Input placeholder='Username' onChange={(e) => this.setState({user: e.target.value})}/>
+        <Button onClick={this.findRankings.bind(this)} >Find</Button>      
+        <Save onClick={this.saveRankings.bind(this)}>Save</Save> 
         <Background>
           <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>
             <List>

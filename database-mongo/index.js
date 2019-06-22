@@ -24,8 +24,19 @@ var playerSchema = mongoose.Schema({
   HIGH: Number,
   LOW: Number,
 });
+var rankingSchema = mongoose.Schema({
+  user: String,
+  userRanking: String,
+  qb: Array,
+  rb: Array,
+  wr: Array,
+  te: Array,
+  def: Array,
+  pk: Array,
+})
 
 var Player = mongoose.model('Player', playerSchema);
+var Ranking = mongoose.model('Ranking', rankingSchema);
 
 var selectAll = function(callback) {
   Player.find({}, function(err, items) {
@@ -37,4 +48,26 @@ var selectAll = function(callback) {
   });
 };
 
+var findRanking = function(user, callback) {
+  Ranking.find({user: user}, function(err, items) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, items);
+    }
+  });
+};
+
+var postRanking = function(ranking, callback) {
+  Ranking.create(ranking, function(err) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, 'success');;
+    }
+  })
+}
+
 module.exports.selectAll = selectAll;
+module.exports.findRanking = findRanking;
+module.exports.postRanking = postRanking;

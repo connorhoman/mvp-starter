@@ -3,7 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
 const Card = styled.div`
-  border: 1px solid black;
+  border: 3px ridge white;
   display: inline-block;
   width: 355px;
 `;
@@ -11,6 +11,7 @@ const Name = styled.span`
   font-weight: bold;
   align-content: left;
   margin-left: 5px;
+  font-size: 100%;
 `;
 const Team = styled.span`
   float: right;
@@ -20,6 +21,7 @@ const ADP = styled.span`
   color: grey;
   margin-left: 5px;
   float: left;
+  font-family: 'Times New Roman', Times, serif;
 `;
 const Bye = styled.span`
   font-size: 14px;
@@ -32,6 +34,7 @@ const Wrapper = styled.div`
 `;
 const Pick = styled.span`
   float: left;
+  font-family: 'Times New Roman', Times, serif;
   font-weight: 900;
 `;
 
@@ -66,10 +69,10 @@ class Player extends React.Component {
     this.turnColor();
   }
   turnGrey() {
-    this.setState({background: 'lightgrey'});
+    this.setState({background: 'black'});
   }
   onClick() {
-    if (this.state.background === 'lightgrey') {
+    if (this.state.background === 'black') {
       this.turnColor();
     } else {
       this.turnGrey();
