@@ -20,8 +20,7 @@ const Team = styled.span`
 `;
 const ADP = styled.span`
   font-size: 12px;
-  color: grey;
-  margin-left: 5px;
+  margin-left: 15px;
   float: left;
   font-family: 'Times New Roman', Times, serif;
 `;
@@ -35,7 +34,6 @@ const Wrapper = styled.div`
   padding: 10px;
 `;
 const AAV = styled.span`
-  color: #525151;
   float: left;
   font-family: 'Times New Roman', Times, serif;
   font-weight: 500;
@@ -47,6 +45,7 @@ class Player extends React.Component {
     super(props);
     this.state = { 
       background: '',
+      AAV: '',
     }
   }
   turnColor() {
@@ -69,11 +68,14 @@ class Player extends React.Component {
       this.setState({background: '#ffbef5'});
     }
     if (this.props.player.name.length === 6) {
-      this.setState({background: 'black'});
+      this.setState({background: 'grey'});
     }
   }
   componentDidMount() {
     this.turnColor();
+    if (this.props.player.AAV !== '') {
+      this.setState({AAV: '$' + this.props.player.AAV});
+    }
   }
   turnGrey() {
     this.setState({background: 'black'});
@@ -92,10 +94,10 @@ class Player extends React.Component {
             <Card onClick={this.onClick.bind(this)} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
               <Wrapper style={{backgroundColor: this.state.background}}>
                 <AAV>
-                  ${ this.state.AAV }
+                  { this.state.AAV }
                 </AAV>
                 <ADP>
-                  ({ this.props.player.ADP })
+                  { this.props.player.ADP }
                 </ADP>
                 <Name>
                   { this.props.player.name }

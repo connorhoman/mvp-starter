@@ -104,7 +104,7 @@ class App extends React.Component {
       url: `/rankings/${this.state.user}`,
       success: (data) => {
         console.log('data', data);
-        this.setState(...data);
+        this.setState(data[0]);
         console.log(data);
         this.setState({userRanking: data[0].user});
       },
