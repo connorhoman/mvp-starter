@@ -21,6 +21,12 @@ const ADP = styled.span`
   margin-left: 5px;
   float: left;
 `;
+const Bye = styled.span`
+  font-size: 14px;
+  color: grey;
+  margin-left: 5px;
+  float: right;
+`;
 const Wrapper = styled.div`
   padding: 10px;
 `;
@@ -71,7 +77,10 @@ class Player extends React.Component {
                 </ADP>
                 <Name>
                   { this.props.player.name }
-                </Name>
+                </Name>              
+                <Bye>
+                  { this.props.player.bye }
+                </Bye>
                 <Team>
                   { this.props.player.team }
                 </Team>
