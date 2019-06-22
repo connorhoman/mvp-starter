@@ -1,35 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import { DragDropContext } from 'react-beautiful-dnd';
 import PlayerList from './components/PlayerList.jsx';
+import data from '../../playerData.json';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      players: []
+      players: data
     }
   }
-
-  componentDidMount() {
-    $.ajax({
-      url: '/players', 
-      success: (data) => {
-        this.setState({
-          players: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
+  
+  onDragEnd() {
+    // TODO
   }
 
   render () {
-    return (<div>
-      <h1>Player List</h1>
-      <PlayerList players={this.state.players}/>
-    </div>)
+    return (
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <div>
+          <h1>Player List</h1>
+          <PlayerList key={1} id={1} players={this.state.players}/>
+        </div>
+      </DragDropContext>
+      
+    )
   }
 }
 
