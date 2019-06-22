@@ -42,6 +42,7 @@ class Player extends React.Component {
       background: ''
     }
   }
+  
   componentDidMount() {
     if (this.props.player.position === 'QB') {
       this.setState({background: '#ffa8ab'});
@@ -67,7 +68,7 @@ class Player extends React.Component {
     return (  
       <Draggable draggableId={this.props.player.id} index={this.props.index}>
         {(provided) => (
-            <Card ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+            <Card onClick={this.onClick} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
               <Wrapper style={{backgroundColor: this.state.background}}>
                 <Pick>
                   { this.props.player.pick }

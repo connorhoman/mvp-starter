@@ -81,7 +81,6 @@ class App extends React.Component {
 
     newRanks.splice(source.index, 1);
     newRanks.splice(destination.index, 0, players[source.index]);
-    console.log(droppableId);
 
     this.setState({[droppableId]: newRanks});
   }
