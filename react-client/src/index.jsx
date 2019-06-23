@@ -103,15 +103,24 @@ class App extends React.Component {
     $.ajax({
       url: `/rankings/${this.state.user}`,
       success: (data) => {
-        console.log('data', data);
-        this.setState(data[0]);
-        console.log(data);
-        this.setState({userRanking: data[0].user});
+        if (data) {
+          console.log('Successfully loaded', data[0].user, 's rankings');
+          this.setState(data[0]);
+          this.setState({userRanking: data[0].user});
+        } else {
+          this.handleNotFound();
+          console.log('Failed to find rankings');
+        } 
+        
       },
       error: (err) => {
-        console.log('err', err);
+        console.log('Failed to speak to database', err);
       }
-    })
+    });
+  }
+
+  handleNotFound() {
+    window.alert('User Not Found');
   }
 
   saveRankings() {
@@ -120,10 +129,10 @@ class App extends React.Component {
       type: 'POST',
       data: this.state,
       success: () => {
-        console.log('Successfully Posted Rankings to Database');
+        window.alert(`Successfully Saved ${this.state.user}'s Rankings`);
       },
       error: (err) => {
-        console.log('err', err);
+        console.log('Failed to save rankings', err);
       }
     });
   }

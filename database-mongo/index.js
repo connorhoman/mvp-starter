@@ -42,30 +42,42 @@ var selectAll = function(callback) {
   Player.find({}, function(err, items) {
     if(err) {
       callback(err, null);
+      console.log('Error passed to server', err);
     } else {
       callback(null, items);
+      console.log("Found initial rankings")
     }
   });
 };
 
 var findRanking = function(user, callback) {
   Ranking.find({user: user}, function(err, items) {
-    if (err) {
+    if (items.length === 0) {
       callback(err, null);
+      console.log('Error passed to server', err);
     } else {
       callback(null, items);
+      console.log('GET Successfuly found these items');
     }
   });
 };
 
 var postRanking = function(ranking, callback) {
-  Ranking.create(ranking, function(err) {
+  Ranking.update(ranking, function(err) {
     if (err) {
-      callback(err, null);
+      Ranking.create(ranking, function(err) {
+        if (err) {
+          callback(err, null);
+          console.log('POST Error passed to server', err);
+        } else {
+          callback(null, 'success');
+          console.log('POST success');
+        }
+      });
     } else {
-      callback(null, 'success');;
+      callback(null, 'Successfully Found');
     }
-  })
+  });
 }
 
 module.exports.selectAll = selectAll;
