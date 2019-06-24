@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fantasy');
+mongoose.connect('mongodb://localhost/fantasy', { useMongoClient: true });
 
 var db = mongoose.connection;
 
@@ -30,7 +30,7 @@ var rankingSchema = mongoose.Schema({
   te: Array,
   def: Array,
   pk: Array,
-})
+});
 
 var Player = mongoose.model('Player', playerSchema);
 var Ranking = mongoose.model('Ranking', rankingSchema);

@@ -90,6 +90,7 @@ class Player extends React.Component {
       this.turnGrey();
     }
   }
+  
   render() {
     return (  
       <Draggable draggableId={this.props.player.id} index={this.props.index}>

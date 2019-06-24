@@ -19,7 +19,7 @@ class PlayerList extends React.Component {
   componentDidMount() {
     this.setState({
       players: this.props.players
-    })
+    });
   }
   
   render() {
@@ -34,7 +34,7 @@ class PlayerList extends React.Component {
           )}
         </Droppable>
       </List>
-    )
+    );
   }
 }
 

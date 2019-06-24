@@ -91,10 +91,10 @@ class App extends React.Component {
           te: tes,
           def: defs,
           pk: pks
-        })
+        });
       },
       error: (err) => {
-        console.log('err', err);
+        console.log(err);
       }
     });
   }
@@ -117,11 +117,9 @@ class App extends React.Component {
       }
     });
   }
-
   handleNotFound() {
     window.alert('User Not Found');
   }
-
   saveRankings() {
     $.ajax({
       url: '/rankings',
@@ -135,12 +133,10 @@ class App extends React.Component {
       }
     });
   }
-
   onDragEnd(result) {
     const destination = result.destination;
     const source = result.source;
     const droppableId = result.destination.droppableId;
-
     if (!destination) {
       return;
     }
@@ -149,10 +145,8 @@ class App extends React.Component {
     }
     const players = this.state[droppableId];
     const newRanks = Array.from(players);
-
     newRanks.splice(source.index, 1);
     newRanks.splice(destination.index, 0, players[source.index]);
-
     this.setState({[droppableId]: newRanks});
   }
 
@@ -209,7 +203,7 @@ class App extends React.Component {
           </DragDropContext>   
         </Background> 
       </div>    
-    )
+    );
   }
 }
 
