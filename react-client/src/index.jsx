@@ -39,6 +39,7 @@ const User = styled.div`
 const Input = styled.input`
   font-family: 'Courier New', Courier, monospace;
   font-size: 20px;
+  background-color: lightgrey;
 `;
 const Wrapper = styled.div`
   text-align: center;
@@ -47,11 +48,13 @@ const Button = styled.button`
   font-family: 'Courier New', Courier, monospace;
   margin-left: 5px;
   font-size: 20px;
+  background-color: lightgrey;
 `;
 const Save = styled.button`
   font-family: 'Courier New', Courier, monospace;
   margin-right: 20px;
   font-size: 20px;
+  background-color: lightgrey;
 `;
 
 class App extends React.Component {
