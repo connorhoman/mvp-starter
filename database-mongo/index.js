@@ -14,15 +14,12 @@ db.once('open', function() {
 var playerSchema = mongoose.Schema({
   id: Number,
   rank: Number,
-  pick: Number,
   name: String,
   position: String,
   team: String,
   bye: Number,
   ADP: Number,
-  STD: Number,
-  HIGH: Number,
-  LOW: Number,
+  url: String,
 });
 var rankingSchema = mongoose.Schema({
   user: String,
@@ -42,10 +39,8 @@ var selectAll = function(callback) {
   Player.find({}, function(err, items) {
     if(err) {
       callback(err, null);
-      console.log('Error passed to server', err);
     } else {
       callback(null, items);
-      console.log("Found initial rankings")
     }
   });
 };
@@ -54,10 +49,8 @@ var findRanking = function(user, callback) {
   Ranking.find({user: user}, function(err, items) {
     if (items.length === 0) {
       callback(err, null);
-      console.log('Error passed to server', err);
     } else {
       callback(null, items);
-      console.log('GET Successfuly found these items');
     }
   });
 };
@@ -68,10 +61,8 @@ var postRanking = function(ranking, callback) {
       Ranking.create(ranking, function(err) {
         if (err) {
           callback(err, null);
-          console.log('POST Error passed to server', err);
         } else {
-          callback(null, 'success');
-          console.log('POST success');
+          callback(null, 'Success');
         }
       });
     } else {

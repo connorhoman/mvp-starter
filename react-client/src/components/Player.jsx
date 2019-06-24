@@ -16,17 +16,19 @@ const Name = styled.span`
 `;
 const Team = styled.span`
   float: right;
-  color: #525151;
+`;
+const Img = styled.div`
+  margin-top: -7px;
+  padding-right: 25px;
+  opacity: .7;
 `;
 const ADP = styled.span`
-  font-size: 12px;
+  font-size: 14px;
   margin-left: 15px;
   float: left;
-  font-family: 'Times New Roman', Times, serif;
 `;
 const Bye = styled.span`
   font-size: 14px;
-  color: grey;
   margin-left: 5px;
   float: right;
 `;
@@ -35,10 +37,10 @@ const Wrapper = styled.div`
 `;
 const AAV = styled.span`
   float: left;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: 500;
-  font-size: 15px;
-  color: #525151;
+  margin-top: -2px;
+  font-weight: 900;
+  font-size: 19px;
+  color: darkgreen;
 `;
 
 class Player extends React.Component {
@@ -68,7 +70,7 @@ class Player extends React.Component {
     if (this.props.player.position === 'PK') {
       this.setState({background: '#ffbef5'});
     }
-    if (this.props.player.name.length === 6) {
+    if (this.props.player.name.slice(0,4) === 'TIER') {
       this.setState({background: 'grey'});
     }
   }
@@ -107,7 +109,9 @@ class Player extends React.Component {
                   { this.props.player.bye }
                 </Bye>
                 <Team>
-                  { this.props.player.team }
+                  <Img>
+                    <img height='29px' width='29px' src={this.props.player.url}></img>
+                  </Img>              
                 </Team>
               </Wrapper>                
             </Card>
