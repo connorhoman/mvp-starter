@@ -70,7 +70,7 @@ var postRanking = function(ranking, callback) {
         if (err) {
           callback(err, null);
         } else {
-          callback(null, 'Successfully Updated Ranking')
+          callback(null, 'Successfully Updated Ranking');
         }
       });
     }
