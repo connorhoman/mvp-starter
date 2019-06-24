@@ -109,7 +109,6 @@ class App extends React.Component {
           this.setState({userRanking: data[0].user});
         } else {
           this.handleNotFound();
-          console.log('Failed to find rankings');
         } 
         
       },

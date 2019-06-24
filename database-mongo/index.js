@@ -56,17 +56,23 @@ var findRanking = function(user, callback) {
 };
 
 var postRanking = function(ranking, callback) {
-  Ranking.update(ranking, function(err) {
-    if (err) {
+  Ranking.find({user:ranking.user}, function(err, items) {
+    if (items.length === 0) {
       Ranking.create(ranking, function(err) {
         if (err) {
           callback(err, null);
         } else {
-          callback(null, 'Success');
+          callback(null, 'Successfully Created Ranking');
         }
       });
     } else {
-      callback(null, 'Successfully Found');
+      Ranking.update(ranking, function(err) {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, 'Successfully Updated Ranking')
+        }
+      });
     }
   });
 }

@@ -34,7 +34,7 @@ app.post('/rankings', function(req, res) {
     if (err) {
       res.sendStatus(500);
     } else {
-      res.send('success');
+      res.send(data);
     }
   });
 });
