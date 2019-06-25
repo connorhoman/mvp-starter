@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
-const mongoURI = 'mongodb://172.31.23.200:27017/fantasy';
-const db = mongoose.connect(mongoURI, { useNewUrlParser: true });
-const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
+mongoose.connect('mongodb://172.31.23.200:27017/fantasy', { useMongoClient: true });
 
-MongoClient.connect(mongoURI, {
-  poolSize: 1000
-}, function(err, db) {
-  assert.equal(null, err);
-  db.close();
+var db = mongoose.connection;
+
+db.on('error', function() {
+  console.log('mongoose connection error');
+});
+
+db.once('open', function() {
+  console.log('mongoose connected successfully');
 });
 
 var playerSchema = mongoose.Schema({
