@@ -87,7 +87,7 @@ class App extends React.Component {
         var pks = sorted.filter(player => player.position === 'PK');
         this.setState({
           user: '',
-          userRanking: 'ESPN',
+          userRanking: '',
           qb: qbs,
           rb: rbs,
           wr: wrs,
@@ -95,6 +95,7 @@ class App extends React.Component {
           def: defs,
           pk: pks
         });
+        this.findRankings();
       },
       error: (err) => {
         console.log(err);
@@ -120,6 +121,7 @@ class App extends React.Component {
       }
     });
   }
+
   handleNotFound() {
     window.alert('User Not Found');
   }
