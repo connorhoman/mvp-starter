@@ -86,8 +86,8 @@ class App extends React.Component {
         var defs = sorted.filter(player => player.position === 'DEF');
         var pks = sorted.filter(player => player.position === 'PK');
         this.setState({
-          user: '',
-          userRanking: '',
+          user: 'ESPN',
+          userRanking: 'ESPN',
           qb: qbs,
           rb: rbs,
           wr: wrs,
