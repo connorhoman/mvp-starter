@@ -42,6 +42,10 @@ const AAV = styled.span`
   font-size: 19px;
   color: darkgreen;
 `;
+const Rank = styled.span`
+  float: left;
+  padding-left: 20px;
+`;
 
 class Player extends React.Component {
   constructor(props) {
@@ -80,18 +84,53 @@ class Player extends React.Component {
       this.setState({AAV: '$' + this.props.player.AAV});
     }
   }
-  turnGrey() {
-    this.setState({background: 'black'});
+
+  onClick(e) {
+    if (e.metaKey) {
+      this.onRightClick();
+    } else {
+      if (this.state.background === 'black') {
+        this.turnColor();
+      } else {
+        this.setState({background: 'black'});
+      }
+    }
   }
-  onClick() {
-    if (this.state.background === 'black') {
+
+  onRightClick() {
+    if (this.state.background === 'gold') {
       this.turnColor();
     } else {
-      this.turnGrey();
+      this.setState({background: 'gold'})
+    }
+  }
+
+  getRank(index) {
+    if (this.props.player.name.slice(0,4) === 'TIER') {
+      return;
+    }
+    if (this.props.player.position === 'QB') {
+      return 'QB' + (index - 4).toString();
+    }
+    if (this.props.player.position === 'RB') {
+      return 'RB' + (index - 9).toString();
+    }
+    if (this.props.player.position === 'WR') {
+      return 'WR' + (index - 9).toString();
+    }
+    if (this.props.player.position === 'TE') {
+      return 'TE' + (index - 3).toString();
+    }
+    if (this.props.player.position === 'DEF') {
+      return 'DEF' + (index - 1).toString();
+    }
+    if (this.props.player.position === 'PK') {
+      return 'K' + (index - 1).toString();
     }
   }
   
   render() {
+
     return (  
       <Draggable draggableId={this.props.player.id} index={this.props.index}>
         {(provided) => (
@@ -100,12 +139,12 @@ class Player extends React.Component {
                 <AAV>
                   { this.state.AAV }
                 </AAV>
-                <ADP>
-                  { this.props.player.ADP }
-                </ADP>
+                <Rank>
+                  { this.getRank(this.props.index) }
+                </Rank> 
                 <Name>
                   { this.props.player.name }
-                </Name>              
+                </Name>         
                 <Bye>
                   { this.props.player.bye }
                 </Bye>
