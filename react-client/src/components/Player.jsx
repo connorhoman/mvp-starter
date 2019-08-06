@@ -80,14 +80,24 @@ class Player extends React.Component {
       this.setState({AAV: '$' + this.props.player.AAV});
     }
   }
-  turnGrey() {
-    this.setState({background: 'black'});
+
+  onClick(e) {
+    if (e.metaKey) {
+      this.onRightClick();
+    } else {
+      if (this.state.background === 'black') {
+        this.turnColor();
+      } else {
+        this.setState({background: 'black'});
+      }
+    }
   }
-  onClick() {
-    if (this.state.background === 'black') {
+
+  onRightClick() {
+    if (this.state.background === 'gold') {
       this.turnColor();
     } else {
-      this.turnGrey();
+      this.setState({background: 'gold'})
     }
   }
   
